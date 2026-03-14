@@ -1,0 +1,23 @@
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+    output = "/home/ubuntu/muzik_uretici/nextjs_space/node_modules/.prisma/client"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Song {
+  id        String   @id @default(cuid())
+  title     String
+  genre     String
+  lyrics    String
+  audioUrl  String   @map("audio_url")
+  duration  Int?     @default(0)
+  jobId     String?  @map("job_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("songs")
+}
